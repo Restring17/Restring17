@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechSolutions - Innovación Digital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* R1: CSS Grid para organizar elementos principales */
+        .contenedor-principal {
+            display: grid;
+            grid-template-areas: 
+                "encabezado"
+                "seccion-principal"
+                "caracteristicas";
+            grid-template-rows: auto 1fr auto;
+            min-height: 100vh;
+        }
+
+        /* Encabezado con menú de navegación */
+        .encabezado {
+            grid-area: encabezado;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .menu-navegacion {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .menu-navegacion a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        /* R4: Cambios de estilo al pasar el mouse */
+        .menu-navegacion a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        /* R2: Menú hamburguesa para móviles */
+        .boton-hamburguesa {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Sección principal */
+        .seccion-principal {
+            grid-area: seccion-principal;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f2f5" width="1200" height="600"/><circle fill="%23667eea" opacity="0.3" cx="200" cy="150" r="100"/><circle fill="%23764ba2" opacity="0.3" cx="800" cy="300" r="150"/></svg>');
+            background-size: cover;
+            background-position: center;
+            padding: 8rem 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        /* R3: Flexbox para alinear elementos */
+        .contenido-principal {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .titulo-principal {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .subtitulo-principal {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .boton-importante {
+            background: #ffd700;
+            color: #333;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .boton-importante:hover {
+            background: #ffed4e;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        /* R1: Grid para sección de características */
+        .caracteristicas {
+            grid-area: caracteristicas;
+            padding: 4rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .contenedor-caracteristicas {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .titulo-seccion {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .grid-caracteristicas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .tarjeta-caracteristica {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tarjeta-caracteristica:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .icono-caracteristica {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .titulo-caracteristica {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-navegacion {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #667eea;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .menu-navegacion.activo {
+                display: flex;
+            }
+
+            .boton-hamburguesa {
+                display: block;
+            }
+
+            .titulo-principal {
+                font-size: 2rem;
+            }
+
+            .seccion-principal {
+                padding: 4rem 1rem;
+            }
+
+            .grid-caracteristicas {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor-principal">
+        <!-- Encabezado con navegación -->
+        <header class="encabezado">
+            <nav class="navbar">
+                <div class="logo">TechSolutions</div>
+                <button class="boton-hamburguesa" onclick="toggleMenu()">☰</button>
+                <ul class="menu-navegacion" id="menu-navegacion">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#sobre-nosotros">Nosotros</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Sección principal -->
+        <section class="seccion-principal">
+            <div class="contenido-principal">
+                <h1 class="titulo-principal">Transformamos tu Negocio Digital</h1>
+                <p class="subtitulo-principal">Soluciones tecnológicas innovadoras para impulsar tu empresa hacia el futuro</p>
+                <button class="boton-importante">Comenzar Ahora</button>
+            </div>
+        </section>
+
+        <!-- Sección de características -->
+        <section class="caracteristicas">
+            <div class="contenedor-caracteristicas">
+                <h2 class="titulo-seccion">Nuestros Servicios</h2>
+                <div class="grid-caracteristicas">
+                    <div class="tarjeta-caracteristica">
+                        <div class="icono-caracteristica">💻</div>
+                        <h3 class="titulo-caracteristica">Desarrollo Web</h3>
+                        <p>Creamos sitios web modernos y responsivos que impulsan tu presencia digital.</p>
+                    </div>
+                    <div class="tarjeta-caracteristica">
+                        <div class="icono-caracteristica">📱</div>
+                        <h3 class="titulo-caracteristica">Apps Móviles</h3>
+                        <p>Desarrollamos aplicaciones móviles nativas e híbridas para iOS y Android.</p>
+                    </div>
+                    <div class="tarjeta-caracteristica">
+                        <div class="icono-caracteristica">☁️</div>
+                        <h3 class="titulo-caracteristica">Soluciones en la Nube</h3>
+                        <p>Migramos tu infraestructura a la nube para mayor eficiencia y escalabilidad.</p>
+                    </div>
+                    <div class="tarjeta-caracteristica">
+                        <div class="icono-caracteristica">🔒</div>
+                        <h3 class="titulo-caracteristica">Ciberseguridad</h3>
+                        <p>Protegemos tu información y sistemas con las mejores prácticas de seguridad.</p>
+                    </div>
+                    <div class="tarjeta-caracteristica">
+                        <div class="icono-caracteristica">📊</div>
+                        <h3 class="titulo-caracteristica">Análisis de Datos</h3>
+                        <p>Convertimos tus datos en insights valiosos para la toma de decisiones.</p>
+                    </div>
+                    <div class="tarjeta-caracteristica">
+                        <div class="icono-caracteristica">🤖</div>
+                        <h3 class="titulo-caracteristica">Inteligencia Artificial</h3>
+                        <p>Implementamos soluciones de IA para automatizar y optimizar procesos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu-navegacion');
+            menu.classList.toggle('activo');
+        }
+    </script>
+</body>
+</html>

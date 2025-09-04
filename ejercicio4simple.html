@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Contacto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .contenedor-contacto {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .titulo-contacto {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+            padding: 2rem;
+            background: #007bff;
+            color: white;
+        }
+
+        /* R1: Flexbox para diseño de dos columnas */
+        .contenido-contacto {
+            display: flex;
+            min-height: 600px;
+        }
+
+        .seccion-formulario {
+            flex: 2;
+            padding: 2rem;
+        }
+
+        .seccion-informacion {
+            flex: 1;
+            background: #333;
+            color: white;
+            padding: 2rem;
+        }
+
+        /* Estilos del formulario */
+        .grupo-campo {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .etiqueta-campo {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* R5: Elementos decorativos para campos */
+        .etiqueta-campo::before {
+            content: '*';
+            color: #e74c3c;
+            margin-right: 5px;
+        }
+
+        .campo-entrada {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        /* Estados del campo */
+        .campo-entrada:focus {
+            outline: none;
+            border-color: #007bff;
+            background: #f8f9fa;
+        }
+
+        .campo-entrada:hover {
+            border-color: #999;
+        }
+
+        /* R2: Estilos para campos válidos e inválidos */
+        .campo-entrada.valido {
+            border-color: #28a745;
+            background: #f8fff8;
+        }
+
+        .campo-entrada.invalido {
+            border-color: #dc3545;
+            background: #fff8f8;
+        }
+
+        .mensaje-error {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .campo-entrada.invalido + .mensaje-error {
+            display: block;
+        }
+
+        /* Campo de texto largo */
+        .campo-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* R4: Botón con efectos y transiciones */
+        .boton-enviar {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,123,255,0.3);
+        }
+
+        .boton-enviar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,123,255,0.4);
+        }
+
+        .boton-enviar:active {
+            transform: translateY(0);
+        }
+
+        /* Sección de información */
+        .titulo-informacion {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .item-informacion {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .icono-informacion {
+            width: 40px;
+            height: 40px;
+            background: #007bff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .texto-informacion h4 {
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+
+        .texto-informacion p {
+            color: white;
+        }
+
+        /* R3: Diseño responsivo - una columna en móviles */
+        @media (max-width: 768px) {
+            .contenido-contacto {
+                flex-direction: column;
+            }
+
+            .seccion-formulario,
+            .seccion-informacion {
+                flex: none;
+            }
+
+            .titulo-contacto {
+                font-size: 2rem;
+                padding: 1.5rem;
+            }
+
+            body {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .seccion-formulario,
+            .seccion-informacion {
+                padding: 1.5rem;
+            }
+
+            .titulo-contacto {
+                font-size: 1.8rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor-contacto">
+        <h1 class="titulo-contacto">Contáctanos</h1>
+        
+        <div class="contenido-contacto">
+            <!-- Sección del formulario -->
+            <div class="seccion-formulario">
+                <form id="formulario-contacto">
+                    <div class="grupo-campo">
+                        <label for="nombre" class="etiqueta-campo">Nombre</label>
+                        <input type="text" id="nombre" class="campo-entrada" required>
+                        <div class="mensaje-error">Por favor ingresa tu nombre</div>
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label for="email" class="etiqueta-campo">Email</label>
+                        <input type="email" id="email" class="campo-entrada" required>
+                        <div class="mensaje-error">Por favor ingresa un email válido</div>
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label for="telefono" class="etiqueta-campo">Teléfono</label>
+                        <input type="tel" id="telefono" class="campo-entrada" required>
+                        <div class="mensaje-error">Por favor ingresa tu teléfono</div>
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label for="asunto" class="etiqueta-campo">Asunto</label>
+                        <input type="text" id="asunto" class="campo-entrada" required>
+                        <div class="mensaje-error">Por favor ingresa el asunto</div>
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label for="mensaje" class="etiqueta-campo">Mensaje</label>
+                        <textarea id="mensaje" class="campo-entrada campo-textarea" required></textarea>
+                        <div class="mensaje-error">Por favor ingresa tu mensaje</div>
+                    </div>
+
+                    <button type="submit" class="boton-enviar">Enviar Mensaje</button>
+                </form>
+            </div>
+
+            <!-- Sección de información -->
+            <div class="seccion-informacion">
+                <h2 class="titulo-informacion">Información de Contacto</h2>
+                
+                <div class="item-informacion">
+                    <div class="icono-informacion">📍</div>
+                    <div class="texto-informacion">
+                        <h4>Dirección</h4>
+                        <p>Av. Principal 123<br>Ciudad, País 12345</p>
+                    </div>
+                </div>
+
+                <div class="item-informacion">
+                    <div class="icono-informacion">📞</div>
+                    <div class="texto-informacion">
+                        <h4>Teléfono</h4>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                </div>
+
+                <div class="item-informacion">
+                    <div class="icono-informacion">✉️</div>
+                    <div class="texto-informacion">
+                        <h4>Email</h4>
+                        <p>contacto@empresa.com</p>
+                    </div>
+                </div>
+
+                <div class="item-informacion">
+                    <div class="icono-informacion">🕒</div>
+                    <div class="texto-informacion">
+                        <h4>Horarios</h4>
+                        <p>Lun - Vie: 9:00 - 18:00<br>Sáb: 9:00 - 14:00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('formulario-contacto').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const campos = ['nombre', 'email', 'telefono', 'asunto', 'mensaje'];
+            let formularioValido = true;
+            
+            campos.forEach(function(campo) {
+                const elemento = document.getElementById(campo);
+                const valor = elemento.value.trim();
+                
+                if (valor === '') {
+                    elemento.classList.remove('valido');
+                    elemento.classList.add('invalido');
+                    formularioValido = false;
+                } else if (campo === 'email' && !validarEmail(valor)) {
+                    elemento.classList.remove('valido');
+                    elemento.classList.add('invalido');
+                    formularioValido = false;
+                } else {
+                    elemento.classList.remove('invalido');
+                    elemento.classList.add('valido');
+                }
+            });
+            
+            if (formularioValido) {
+                alert('Formulario enviado correctamente');
+                this.reset();
+                campos.forEach(function(campo) {
+                    document.getElementById(campo).classList.remove('valido', 'invalido');
+                });
+            }
+        });
+        
+        // Validación en tiempo real
+        document.querySelectorAll('.campo-entrada').forEach(function(campo) {
+            campo.addEventListener('blur', function() {
+                const valor = this.value.trim();
+                
+                if (valor === '') {
+                    this.classList.remove('valido');
+                    this.classList.add('invalido');
+                } else if (this.type === 'email' && !validarEmail(valor)) {
+                    this.classList.remove('valido');
+                    this.classList.add('invalido');
+                } else {
+                    this.classList.remove('invalido');
+                    this.classList.add('valido');
+                }
+            });
+            
+            campo.addEventListener('focus', function() {
+                this.classList.remove('invalido', 'valido');
+            });
+        });
+        
+        function validarEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+    </script>
+</body>
+</html>
